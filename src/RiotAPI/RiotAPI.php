@@ -2322,4 +2322,30 @@ class RiotAPI
 
 		return $this->getResult();
 	}
+
+
+    /********************************************
+     *
+     *  THIRD PARTY CODE
+     *
+     * @link  https://developer.riotgames.com/api-methods/#third-party-code-v3/GET_getThirdPartyCodeBySummonerId
+     *
+     ********************************************/
+    const RESOURCE_THIRD_PARTY_CODE_V3 = 'v3';
+
+    /**
+     *  Get third party code
+     *
+     * @param int $summoner_id
+     *
+     * @return string
+     * @link https://developer.riotgames.com/api-methods/#third-party-code-v3
+     */
+    public function thirdPartyCode( int $summoner_id = null ): string
+    {
+        $this->setEndpoint("/lol/platform/" . self::RESOURCE_THIRD_PARTY_CODE_V3 . "/third-party-code/by-summoner/". $summoner_id)
+             ->makeCall();
+
+        return $this->getResult();
+    }
 }
