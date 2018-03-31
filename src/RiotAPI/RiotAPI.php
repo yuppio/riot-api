@@ -1989,8 +1989,8 @@ class RiotAPI
 //		if (empty($parameters->allowedSummonerIds->participants))
 //			throw new RequestParameterException('List of participants (allowedSummonerIds->participants) may not be empty. If you wish to allow anyone, fill it with 0, 1, 2, 3, etc.');
 
-		if ($parameters->teamSize * 2 > count($parameters->allowedSummonerIds->participants))
-			throw new RequestParameterException('Not enough players to fill teams (more participants required).');
+//		if (!empty($parameters->allowedSummonerIds->participants) && $parameters->teamSize * 2 > count($parameters->allowedSummonerIds->participants))
+//			throw new RequestParameterException('Not enough players to fill teams (more participants required).');
 
 		if (in_array($parameters->pickType, self::TOURNAMENT_ALLOWED_PICK_TYPES, true) == false)
 			throw new RequestParameterException('Value of pick type (pickType) is invalid. Allowed values: ' . implode(', ', self::TOURNAMENT_ALLOWED_PICK_TYPES));
@@ -2000,6 +2000,10 @@ class RiotAPI
 
 		if (in_array($parameters->spectatorType, self::TOURNAMENT_ALLOWED_SPECTATOR_TYPES, true) == false)
 			throw new RequestParameterException('Value of spectator type (spectatorType) is invalid. Allowed values: ' . implode(', ', self::TOURNAMENT_ALLOWED_SPECTATOR_TYPES));
+
+		if (empty($parameters->allowedSummonerIds)) {
+		    unset($parameters->allowedSummonerIds);
+        }
 
 		$data = json_encode($parameters);
 
